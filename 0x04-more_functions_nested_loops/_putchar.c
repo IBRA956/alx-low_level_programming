@@ -1,13 +1,21 @@
 #include "main.h"
-#include <unistd.h>
+
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * print_line - draws a straight line in the terminal
+ * @n: number of times the character _ should be printed
  */
-int _putchar(char c)
+void print_line(int n)
 {
-	return (write(1, &c, 1));
+    if (n <= 0)
+    {
+        _putchar('\n');
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            putchar('');
+        }
+        _putchar('\n');
+    }
 }
