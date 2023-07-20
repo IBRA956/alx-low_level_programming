@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
  * main - check the code
@@ -7,10 +8,11 @@
  */
 int main(void)
 {
-    print_line(0);    // Will print an empty line because n is 0.
-    print_line(2);    // Will print "__" (two underscores) in a new line.
-    print_line(10);   // Will print "__________" (ten underscores) in a new line.
-    print_line(-4);   // Will print an empty line because n is less than or equal to 0.
+    char c;
+
+    c = '0';
+    printf("%c: %d\n", c, _isdigit(c));
+    c = 'a';
+    printf("%c: %d\n", c, _isdigit(c));
     return (0);
 }
-
