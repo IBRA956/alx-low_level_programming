@@ -7,9 +7,8 @@
  * @idx: index of the list where the new node should be added
  * @n: data of the new node
  * 
- * Return:  the address of the new node, or NULL if it failed
+ * Return: the address of the new node, or NULL if it failed
  */
-
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
     if (h == NULL)
@@ -35,18 +34,17 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
             current = current->next;
         }
 
-        if (current == NULL && idx != 0) {
+        if (current == NULL) {
             free(new_node);
             return NULL; // Index out of bounds
         }
 
         // Insert in the middle or at the end
         new_node->prev = current;
-        new_node->next = (current != NULL) ? current->next : NULL;
-        if (current != NULL && current->next != NULL)
+        new_node->next = current->next;
+        if (current->next != NULL)
             current->next->prev = new_node;
-        if (current != NULL)
-            current->next = new_node;
+        current->next = new_node;
     }
 
     return new_node;
