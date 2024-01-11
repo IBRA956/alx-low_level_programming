@@ -13,21 +13,24 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
     if (!h)  // Check if the double pointer to the head is NULL
         return NULL;
 
-    // Step 1: Check if the given index is valid
-    if (idx != 0 && !*h)
-        return NULL;
-
-    // Step 2: Allocate memory for the new node
+    // Allocate memory for the new node
     dlistint_t *new_node = malloc(sizeof(dlistint_t));
     if (!new_node)
         return NULL;
 
-    // Step 3: Assign data to the new node
+    // Assign data to the new node
     new_node->n = n;
     new_node->prev = NULL;
     new_node->next = NULL;
 
-    // Step 4: Traverse to the specified index
+    // If the list is empty and index is not 0, return NULL
+    if (!*h && idx != 0)
+    {
+        free(new_node);
+        return NULL;
+    }
+
+    // If inserting at the beginning
     if (idx == 0)
     {
         new_node->next = *h;
@@ -37,19 +40,21 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
         return new_node;
     }
 
+    // Traverse to the specified index
     dlistint_t *current = *h;
     for (unsigned int i = 0; i < idx - 1 && current; i++)
     {
         current = current->next;
     }
 
+    // If index is out of bounds or current node is NULL
     if (!current)
     {
         free(new_node);
-        return NULL;  // Index out of bounds
+        return NULL;
     }
 
-    // Step 5: Adjust pointers to insert the new node
+    // Adjust pointers to insert the new node
     new_node->next = current->next;
     new_node->prev = current;
     if (current->next)
